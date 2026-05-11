@@ -1,24 +1,35 @@
-# ReDi: Rectified Discrete Flow (NeurIPS 2025)
+<div align="center">
 
-<p align="left">
-<a href="https://arxiv.org/abs/2507.15897" alt="arXiv">
-    <img src="https://img.shields.io/badge/arXiv-2507.15897-b31b1b.svg?style=flat" /></a>
-</p>
+# ReDi: Rectified Discrete Flow
 
-By [Jaehoon Yoo](https://sites.google.com/view/jaehoon-yoo/), [Wonjung Kim](https://github.com/wjhjkim), [Seunghoon Hong](https://maga33.github.io/)
+**[Jaehoon Yoo](https://sites.google.com/view/jaehoon-yoo/홈)**, **[Wonjung Kim](https://github.com/wjhjkim)**, **[Seunghoon Hong](https://maga33.github.io/)**
 
-This repository contains the official implementation of the paper:
-[ReDi: Rectified Discrete Flow (arXiv, 2025)](https://arxiv.org/abs/2507.15897)
+KAIST
 
-We introduce *ReDi*, a novel iterative method that reduces factorization error by rectifying the coupling between source and target distribution.
+**[[Project Page]](https://Ugness.github.io/official_redi)** | **[[Paper]](https://arxiv.org/abs/2507.15897)** | **[[Checkpoint]](https://huggingface.co/Ugness/ReDi)**
 
-In this repo, we integrate [Halton-MaskGIT](https://github.com/valeoai/Halton-MaskGIT/tree/v1.0) and [DUO](https://github.com/s-sahoo/duo) as the structural foundation for our implementation, which involves both image and text models to demonstrate the ReDi method.
+</div>
+
+## TL;DR
 
 <p align="center">
     <div style="background-color:#f0f0f0; display:inline-block;">
         <img src="figures/compare_qual.png"/>
     </div>
 </p>
+
+We introduce **ReDi**, a novel iterative method that reduces factorization error by rectifying the coupling between source and target distribution.
+
+## Overview
+
+Discrete Flow-based Models (DFMs) are powerful generative models for high-quality discrete data but typically suffer from slow sampling speeds due to their reliance on iterative decoding processes. 
+This reliance on a multi-step process originates from the factorization approximation of DFMs, which is necessary for handling high-dimensional data.
+In this paper, we analyze the factorization approximation error using Conditional Total Correlation (TC), and reveal its dependence on the coupling.
+To address the challenge of efficient few-step generation, we propose **Rectified Discrete Flow (ReDi)**, a novel iterative method that reduces the underlying factorization error (measured as Conditional TC) by rectifying the coupling between source and target distributions.
+We theoretically prove that each ReDi step guarantees a monotonic decreasing Conditional TC, ensuring its convergence.
+Empirically, ReDi significantly reduces Conditional TC and enables few-step generation.
+Moreover, we demonstrate that the rectified couplings are well-suited for training efficient one-step models on image generation.
+ReDi offers a simple and theoretically grounded approach for tackling the few-step challenge, providing a new perspective on efficient discrete data synthesis.
 
 ## Project Structure
       ├ image/                                        <- MaskGIT based ReDi-image code
@@ -44,7 +55,7 @@ In this repo, we integrate [Halton-MaskGIT](https://github.com/valeoai/Halton-Ma
       |    ├── compute_tc.py                          <- Compute the TC
       |    ├── download_models.py                     <- Download the pretrained models
       |    ├── LICENSE.txt                            <- MIT license
-      |    ├── requirements.yaml                      <- Help to install env 
+      |    ├── requirements.txt                       <- Help to install env 
       |    ├── README.md                              
       |    └── main.py                                <- Main
       |
@@ -74,7 +85,7 @@ In this repo, we integrate [Halton-MaskGIT](https://github.com/valeoai/Halton-Ma
       |    ├── main.py                                <- Main
       |    ├── metrics.py                             <- Metrics module
       |    ├── README.md                              
-      |    ├── requirements.yaml                      <- Help to install env 
+      |    ├── requirements.txt                       <- Help to install env 
       |    ├── trainer_base.py                        <- Boiler plate trainer using pytorch lightning.
       |    └── utils.py                               <- LR scheduler, logging, `fsspec` handling.
 
@@ -106,9 +117,13 @@ To get started, you can follow the process in "Usage" part of each [image](image
 </p>
 
 ## License
+
 The ReDi-image(Halton-MaskGIT-based ReDi) is licensed under the MIT License, and the ReDi-text(DUO-based ReDi) is licensed under the Apache License 2.0. From this, this project is licensed under the Apache License 2.0.
 
 ## Acknowledgments
+
+In this repo, we integrate [Halton-MaskGIT](https://github.com/valeoai/Halton-MaskGIT/tree/v1.0) and [DUO](https://github.com/s-sahoo/duo) as the structural foundation for our implementation, which involves both image and text models to demonstrate the ReDi method.
+
 The pretrained VQGAN ImageNet is from the [Halton-MaskGIT](https://github.com/valeoai/Halton-MaskGIT/tree/v1.0) and [LlamaGen](https://github.com/FoundationVision/LlamaGen?tab=readme-ov-file) official repository.
 
 ## Citation
@@ -116,7 +131,7 @@ Cite our paper using:
 ```bibtex
 @misc{yoo2025redirectifieddiscreteflow,
       title={ReDi: Rectified Discrete Flow}, 
-      author={Jaehoon Yoo and Wonjung Kim and Seunghoon Hong},
+      author={Yoo, Jaehoon and Kim, Wonjung and Hong, Seunghoon},
       year={2025},
       eprint={2507.15897},
       archivePrefix={arXiv},
